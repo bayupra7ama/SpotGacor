@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <!-- Home Fragment -->
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.bayupratama.spotgacor.ui.home.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_lokasi"
+            app:destination="@id/navigation_lokasi" />
+    </fragment>
+
+    <!-- Lokasi Fragment -->
+    <fragment
+        android:id="@+id/navigation_lokasi"
+        android:name="com.bayupratama.spotgacor.ui.home.ui.lokasi.LokasiFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_lokasi">
+        <!-- Action to navigate to DetailLokasiFragment -->
+        <action
+            android:id="@+id/action_navigation_lokasi_to_detailLokasiFragment"
+            app:destination="@id/detailLokasiFragment" />
+    </fragment>
+
+    <!-- DetailLokasiFragment tidak termasuk dalam BottomNavigation -->
+    <fragment
+        android:id="@+id/detailLokasiFragment"
+        android:name="com.bayupratama.spotgacor.ui.home.ui.lokasi.DetailLokasiFragment"
+        android:label="Detail Lokasi">
+        <!-- Tidak perlu action dari BottomNavigationView, hanya dipanggil dari LokasiFragment -->
+    </fragment>
+
+    <!-- Story Fragment -->
+    <fragment
+        android:id="@+id/navigation_story"
+        android:name="com.bayupratama.spotgacor.ui.home.ui.story.StoryFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_story" />
+
+    <!-- Profile Fragment -->
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.bayupratama.spotgacor.ui.home.ui.profile.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>

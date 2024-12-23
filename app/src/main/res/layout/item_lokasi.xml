@@ -1,0 +1,66 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    android:background="@android:color/white"
+    android:clipToPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Image Section -->
+        <ImageView
+            android:id="@+id/avatarImageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:contentDescription="@string/image"
+            android:adjustViewBounds="true"
+            android:background="@drawable/spot" />
+
+        <!-- Text Content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Tempat"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#333333"
+                android:fontFamily="@font/poppins_semibold" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:rating="4.5"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="6dp"
+                style="@style/Widget.AppCompat.RatingBar.Small" />
+
+            <TextView
+                android:id="@+id/descriptionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deskripsi singkat tentang tempat ini..."
+                android:textSize="14sp"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:textColor="#666666" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

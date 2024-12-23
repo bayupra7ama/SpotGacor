@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">SpotGacor</string>
+    <string name="user_name">user name\n</string>
+    <string name="Login">login</string>
+    <string name="password">masukan password</string>
+    <string name="belum_punya_akun">belum punya akun ?</string>
+    <string name="daftar">daftar</string>
+    <string name="login">Login</string>
+    <string name="register">register</string>
+    <string name="email">email</string>
+    <string name="nomor_hp">nomor hp</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="lokasi">Lokasi</string>
+    <string name="story">story</string>
+    <string name="profile">profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="judul">Temukan Spot Pemancingan Ikan Air Tawar Terbaik</string>
+    <string name="sub_judul">Kami menyediakan inforamsi terpercaya\n lokasi spot gacor</string>
+    <string name="tampilkan_map">Tampilkan halaman map</string>
+    <string name="titik">Temukan titik titik lokasi</string>
+    <string name="more_services">more service</string>
+    <string name="lokasi_temukan">Temukan lokasi pemancingan</string>
+    <string name="dataUnavailable">Data tidak ditemukan</string>
+    <string name="deskripsi">deskripsi</string>
+    <string name="kembali">kembali</string>
+    <string name="komentar_dari_pengguna_akan_ditampilkan_di_sini">Komentar dari pengguna akan ditampilkan di sini.</string>
+    <string name="back_icon">Back Icon</string>
+    <string name="detail_lokasi">Detail Lokasi</string>
+    <string name="keselamatan_pemancing_adalah_hal_terpenting">keselamatan pemancing adalah hal terpenting.</string>
+    <string name="parit_kebun_sawit">Parit kebun sawit</string>
+    <string name="_4_9">4.9</string>
+    <string name="_1">1</string>
+    <string name="pematang_duku">Pematang duku</string>
+    <string name="dibagikan_oleh_d">dibagikan oleh : %d</string>
+    <string name="rute">Rute : setelah sampai di perkebunan sawit dilanjutkan dengan berjalan kaki melewati semak belukar, pada saat hujan banjir</string>
+    <string name="jenisikan">Jenis Ikan : Sekepat, Gabus</string>
+    <string name="saran_perlengkapan">Saran Perlengkapan : Memakai baju dan celana panjang, mengenakan sepatu, membawa parang</string>
+    <string name="rekomendasi_umpan">Rekomendasi umpan : Cacing, Telur Kerengga</string>
+    <string name="image">gambar lokasi</string>
+    <string name="spot_gacor">Spot Gacor</string>
+
+    <string name="shared_by">dibagikan oleh : %1$s</string>
+    <string name="route">rute : %1$s</string>
+    <string name="fish_type">jenis ikan : %1$s</string>
+    <string name="equipment_suggestion">saran perlengkapan : %1$s</string>
+    <string name="bait">umpan : %1$s</string>
+    <string name="rating">%.1f</string>
+    <string name="komentar">Komentar</string>
+    <string name="ulasan">Ulasan (%1$s)</string>
+</resources>
