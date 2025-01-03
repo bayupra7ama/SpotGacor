@@ -7,7 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="6dp">
 
         <!-- Toolbar with Back Button -->
         <LinearLayout
@@ -22,6 +23,14 @@
                 android:src="@drawable/back"
                 android:contentDescription="@string/kembali"
                 android:layout_marginEnd="8dp" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_gravity="center" />
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -42,10 +51,10 @@
 
         <!-- Image -->
         <ImageView
+            android:id="@+id/placeHolderImg"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/spot"
-            android:scaleType="centerCrop"
+            android:src="@drawable/add_photo_place"
             android:layout_marginTop="16dp" />
 
         <!-- Toggle Switch -->
@@ -53,7 +62,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-
             android:layout_marginTop="16dp">
 
             <TextView
@@ -73,19 +81,56 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Nama tempat"
+            android:layout_marginTop="16dp"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/nama_tempat_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/masukkan_deskripsi_rute"
+            android:inputType="textMultiLine"
+            android:lines="1"
+            android:gravity="top"
+            android:background="@drawable/edt_background" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alamat"
+            android:layout_marginTop="16dp"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/alamat_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/masukkan_deskripsi_rute"
+            android:inputType="textMultiLine"
+            android:lines="1"
+            android:gravity="top"
+            android:background="@drawable/edt_background" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Rute"
             android:layout_marginTop="16dp"
             android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/rute_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Masukkan deskripsi rute"
+            android:hint="@string/masukkan_deskripsi_rute"
             android:inputType="textMultiLine"
             android:lines="3"
             android:gravity="top"
-            android:background="@android:drawable/edit_text" />
+            android:background="@drawable/edt_background" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -96,27 +141,30 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/jenis_ikan_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/edt_background"
             android:hint="Masukkan jenis ikan"
             android:inputType="text" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Saran Perlengkapan"
+            android:layout_height="26dp"
             android:layout_marginTop="16dp"
+            android:text="Saran Perlengkapan"
             android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/saran_perlengkapan_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Masukkan saran perlengkapan"
             android:inputType="textMultiLine"
             android:lines="3"
             android:gravity="top"
-            android:background="@android:drawable/edit_text" />
+            android:background="@drawable/edt_background" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -126,14 +174,17 @@
             android:textSize="14sp"
             android:textStyle="bold" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/jenis_umpan_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/edt_background"
             android:hint="Masukkan rekomendasi umpan"
             android:inputType="text" />
 
         <!-- Upload Button -->
         <Button
+            android:id="@+id/btn_upload"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Upload"

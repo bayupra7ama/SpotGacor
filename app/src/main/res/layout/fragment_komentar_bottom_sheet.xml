@@ -1,31 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:padding="6dp"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="6dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewKomentar"
-        android:layout_width="match_parent"
-        tools:listitem="@layout/ulasan_item"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ulsan_count"
-        app:layout_constraintVertical_bias="0.021" />
-
+    <!-- TextView untuk judul ulasan -->
     <TextView
         android:id="@+id/ulsan_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:text="@string/ulasan"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textStyle="bold" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewKomentar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:listitem="@layout/ulasan_item" />
+
+
+
+        <Button
+            android:id="@+id/btnAddUlasan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_ulasan" />
+
+    <!-- ProgressBar -->
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center" />
+</LinearLayout>

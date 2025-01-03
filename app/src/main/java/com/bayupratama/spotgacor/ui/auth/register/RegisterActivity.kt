@@ -13,6 +13,7 @@ import com.bayupratama.spotgacor.data.response.ApiResponseRegister
 import com.bayupratama.spotgacor.data.retrofit.ApiConfig
 import com.bayupratama.spotgacor.databinding.ActivityRegisterBinding
 import com.bayupratama.spotgacor.helper.Sharedpreferencetoken
+import com.bayupratama.spotgacor.ui.auth.login.LoginActivity
 import com.bayupratama.spotgacor.ui.home.MainActivity
 
 import retrofit2.Call
@@ -51,6 +52,11 @@ class RegisterActivity : AppCompatActivity() {
 
         }
 
+        binding.tvLogin.setOnClickListener{
+            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun showLoading(isLoading:Boolean){
@@ -73,10 +79,15 @@ class RegisterActivity : AppCompatActivity() {
                 val responseBody = response.body()
                 if (response.isSuccessful && responseBody != null) {
                     val token = responseBody.data?.accessToken // Pastikan respons memiliki field `token`
-
+                    val response = responseBody.data?.user
                     if (!token.isNullOrEmpty()) {
                         // Simpan token ke SharedPreferences
                         sharedpreferencetoken.saveToken(token)
+                        val username = response?.name
+                        val emai = response?.email
+                        val photoProfile = response?.profilePhotoUrl
+
+                        sharedpreferencetoken.saveUserData(username,emai,photoProfile)
                     }
 
                     Toast.makeText(

@@ -26,14 +26,19 @@
         <action
             android:id="@+id/action_navigation_lokasi_to_detailLokasiFragment"
             app:destination="@id/detailLokasiFragment" />
+        <action
+            android:id="@+id/action_navigation_lokasi_to_bagikanLokasiFragment"
+            app:destination="@id/bagikanLokasiFragment" />
     </fragment>
 
     <!-- DetailLokasiFragment tidak termasuk dalam BottomNavigation -->
     <fragment
         android:id="@+id/detailLokasiFragment"
         android:name="com.bayupratama.spotgacor.ui.home.ui.lokasi.DetailLokasiFragment"
-        android:label="Detail Lokasi">
-        <!-- Tidak perlu action dari BottomNavigationView, hanya dipanggil dari LokasiFragment -->
+        android:label="Detail Lokasi"
+        tools:layout="@layout/fragment_detail_lokasi"
+        >
+
     </fragment>
 
     <!-- Story Fragment -->
@@ -49,4 +54,10 @@
         android:name="com.bayupratama.spotgacor.ui.home.ui.profile.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/bagikanLokasiFragment"
+        android:name="com.bayupratama.spotgacor.ui.home.ui.lokasi.BagikanLokasiFragment"
+        android:label="BagikanLokasiFragment"
+        tools:layout="@layout/fragment_bagikan_lokasi"
+        />
 </navigation>

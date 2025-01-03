@@ -1,4 +1,4 @@
-package com.bayupratama.spotgacor.data.helper
+package com.bayupratama.spotgacor.helper
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

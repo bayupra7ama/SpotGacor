@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_ulasan"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <!-- Input Rating -->
+    <TextView
+        android:id="@+id/tvRatingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rating_hint"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:stepSize="1.0"
+        android:isIndicator="false" />
+
+    <!-- Input Komentar -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayoutKomentar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/komentar_hint">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etKomentar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Tombol Kirim -->
+    <Button
+        android:id="@+id/btnSubmitUlasan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/submit_ulasan" />
+
+</LinearLayout>

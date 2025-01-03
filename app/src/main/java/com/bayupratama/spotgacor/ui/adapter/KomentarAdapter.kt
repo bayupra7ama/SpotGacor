@@ -14,7 +14,7 @@ import com.bayupratama.spotgacor.data.response.Ulasan
 import com.bayupratama.spotgacor.databinding.UlasanItemBinding
 import com.bumptech.glide.Glide
 
-class KomentarAdapter(private val ulasanList: List<Ulasan>) :
+class KomentarAdapter(private var ulasanList: List<Ulasan>) :
     RecyclerView.Adapter<KomentarAdapter.KomentarViewHolder>() {
 
     // ViewHolder untuk item komentar
@@ -47,6 +47,8 @@ class KomentarAdapter(private val ulasanList: List<Ulasan>) :
         }
     }
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KomentarViewHolder {
         // Menyusun item komentar menggunakan binding
         val binding = UlasanItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -60,5 +62,9 @@ class KomentarAdapter(private val ulasanList: List<Ulasan>) :
 
     override fun getItemCount(): Int {
         return ulasanList.size
+    }
+    fun updateData(newData: List<Ulasan>) {
+        ulasanList = newData
+        notifyDataSetChanged()
     }
 }

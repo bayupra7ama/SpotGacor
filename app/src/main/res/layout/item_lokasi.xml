@@ -18,11 +18,11 @@
         <ImageView
             android:id="@+id/avatarImageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
             android:contentDescription="@string/image"
             android:adjustViewBounds="true"
-            android:background="@drawable/spot" />
+            android:background="@drawable/loading3" />
 
         <!-- Text Content -->
         <LinearLayout

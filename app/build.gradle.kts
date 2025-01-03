@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 
 
 }
@@ -32,6 +33,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -72,5 +74,12 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx.v274)
     implementation(libs.coil)
     implementation(libs.androidx.viewpager2.v100)
+
+    implementation (libs.gson)
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
+    implementation (libs.compressor)
+
+
 
 }

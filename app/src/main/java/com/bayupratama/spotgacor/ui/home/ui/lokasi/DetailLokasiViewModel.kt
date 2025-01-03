@@ -12,21 +12,29 @@ import com.bayupratama.spotgacor.data.retrofit.ApiService
 import kotlinx.coroutines.launch
 
 class DetailLokasiViewModel(private val apiService: ApiService, private  val token: String) : ViewModel() {
-
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
     private val _lokasiDetail = MutableLiveData<ApiResponseLokasiDetail>()
     val lokasiDetail: LiveData<ApiResponseLokasiDetail> get() = _lokasiDetail
 
     private val _ulasanList = MutableLiveData<List<Ulasan>>()
     val ulasanList: LiveData<List<Ulasan>> get() = _ulasanList
 
+    
+
     fun getLokasiDetail(lokasiId: Int,token: String) {
+
         viewModelScope.launch {
+            _isLoading.postValue(true) // Mulai loading
+
             try {
                 val response = apiService.getLokasiDetail(lokasiId,token)
                 _lokasiDetail.postValue(response.body())
                 _ulasanList.postValue(response.body()?.data?.ulasan)
             } catch (e: Exception) {
                 Log.d("gagal meload detail", "getLokasiDetail: ${e.message} ")
+            }finally {
+                _isLoading.postValue(false) // Selesai loading
             }
         }
     }

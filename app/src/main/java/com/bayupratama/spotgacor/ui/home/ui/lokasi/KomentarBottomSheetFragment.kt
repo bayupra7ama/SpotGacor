@@ -1,18 +1,14 @@
 package com.bayupratama.spotgacor.ui.home.ui.lokasi
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bayupratama.spotgacor.R
-import com.bayupratama.spotgacor.data.helper.LokasiViewModelFactory
-import com.bayupratama.spotgacor.data.response.Ulasan
+import com.bayupratama.spotgacor.helper.LokasiViewModelFactory
 import com.bayupratama.spotgacor.data.retrofit.ApiConfig
 import com.bayupratama.spotgacor.databinding.FragmentKomentarBottomSheetBinding
 import com.bayupratama.spotgacor.helper.Sharedpreferencetoken
@@ -47,18 +43,39 @@ class KomentarBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.btnAddUlasan.setOnClickListener{
+            val intent = Intent(requireContext(), AddUlasanActivity::class.java)
+            intent.putExtra("lokasiId", lokasiId) // Kirim lokasi ID
+            startActivity(intent)
+        }
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                binding.progressBar2.visibility = View.VISIBLE
+                binding.recyclerViewKomentar.visibility = View.GONE
+            } else {
+                binding.progressBar2.visibility = View.GONE
+                binding.recyclerViewKomentar.visibility = View.VISIBLE
+            }
+        }
+
         // Mendapatkan ID Lokasi dari arguments
         lokasiId = arguments?.getInt("lokasiId") ?: 0
         viewModel.getLokasiDetail(lokasiId, "Bearer ${Sharedpreferencetoken(requireContext()).getToken()!!}")
         // Mengamati LiveData ulasanList dari ViewModel
         viewModel.ulasanList.observe(viewLifecycleOwner) { ulasanList ->
-            // Setup RecyclerView dan Adapter
-            komentarAdapter = KomentarAdapter(ulasanList)
-            binding.recyclerViewKomentar.layoutManager = LinearLayoutManager(context)
-            binding.recyclerViewKomentar.adapter = komentarAdapter
-            val ulasanCount = ulasanList?.count()?.toString() ?: "0" // Default ke "0" jika ulasanList null
-            binding.ulsanCount.text = getString(R.string.ulasan,ulasanCount)
+            if (::komentarAdapter.isInitialized) {
+                // Update data pada adapter
+                komentarAdapter.updateData(ulasanList)
+            } else {
+                // Inisialisasi adapter dan RecyclerView
+                komentarAdapter = KomentarAdapter(ulasanList)
+                binding.recyclerViewKomentar.layoutManager = LinearLayoutManager(context)
+                binding.recyclerViewKomentar.adapter = komentarAdapter
+            }
+            val ulasanCount = ulasanList?.count()?.toString() ?: "0"
+            binding.ulsanCount.text = getString(R.string.ulasan, ulasanCount)
         }
+
 
         // Memuat data komentar berdasarkan ID lokasi
         viewModel.getLokasiDetail(lokasiId, "Bearer ${Sharedpreferencetoken(requireContext()).getToken()!!}")
@@ -68,5 +85,10 @@ class KomentarBottomSheetFragment : BottomSheetDialogFragment() {
         super.onDestroyView()
         _binding = null
     }
+    override fun onResume() {
+        super.onResume()
+        viewModel.getLokasiDetail(lokasiId, "Bearer ${Sharedpreferencetoken(requireContext()).getToken()!!}")
+    }
+
 }
 

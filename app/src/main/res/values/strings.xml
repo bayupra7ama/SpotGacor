@@ -51,4 +51,25 @@
     <string name="rating">%.1f</string>
     <string name="komentar">Komentar</string>
     <string name="ulasan">Ulasan (%1$s)</string>
+    <string name="add_icon">Add Icon</string>
+    <string name="location_icon">Location Icon</string>
+    <string name="masukkan_deskripsi_rute">Masukkan deskripsi rute</string>
+    <string name="review">koment</string>
+    <string name="send">berikan ulasan</string>
+    <string name="add_ulasan">berikan ulasan</string>
+    <string name="komentar_hint">Review</string>
+    <string name="submit_ulasan">Kirim</string>
+    <string name="rating_hint">rating</string>
+    <string name="STORY">STORY</string>
+    <string name="upload">upload</string>
+    <string name="gallery">gallery</string>
+    <string name="camera">camera</string>
+    <string name="caption_hint">masukan caption</string>
+    <string name="add_story">Add Story</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="normal_type">normal</string>
+    <string name="satellite_type">satelit</string>
+    <string name="terrain_type">terrain</string>
+    <string name="hybrid_type">hybrid</string>
+    <string name="logut">Logout</string>
 </resources>

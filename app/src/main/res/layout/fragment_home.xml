@@ -43,7 +43,7 @@
                 />
             <LinearLayout
 
-                android:id="@+id/recycling"
+                android:id="@+id/mapBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -143,11 +143,11 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/profile_button"
+                android:id="@+id/story_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginEnd="8dp"
+                android:layout_weight="1"
                 android:background="@drawable/layout_shape"
                 android:orientation="vertical"
                 android:paddingVertical="16dp">
@@ -155,10 +155,10 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginHorizontal="34dp"
-                    android:src="@drawable/fishing_icon"
-                    android:scaleType="fitXY" />
+                    android:layout_marginBottom="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/fishing_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"

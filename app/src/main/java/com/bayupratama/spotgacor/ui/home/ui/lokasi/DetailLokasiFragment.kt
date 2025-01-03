@@ -1,17 +1,19 @@
 package com.bayupratama.spotgacor.ui.home.ui.lokasi
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.bayupratama.spotgacor.R
-import com.bayupratama.spotgacor.data.helper.LokasiViewModelFactory
+import com.bayupratama.spotgacor.helper.LokasiViewModelFactory
 import com.bayupratama.spotgacor.data.retrofit.ApiConfig
 import com.bayupratama.spotgacor.databinding.FragmentDetailLokasiBinding
-import com.bayupratama.spotgacor.databinding.FragmentLokasiBinding
 import com.bayupratama.spotgacor.helper.Sharedpreferencetoken
 import com.bayupratama.spotgacor.ui.adapter.ImageSliderAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -43,6 +45,7 @@ class DetailLokasiFragment : Fragment() {
         val lokasiId = arguments?.getInt("lokasiId") ?: 0
         val lokasiNama = arguments?.getString("lokasiNama")
         Log.d("DetailLokasiFragment", "ID: $lokasiId, Nama: $lokasiNama")
+
 
         sharedpreferencetoken = Sharedpreferencetoken(requireContext())
         val token = "Bearer " + sharedpreferencetoken.getToken().toString()
@@ -78,9 +81,34 @@ class DetailLokasiFragment : Fragment() {
             val ulasan = response.data.ulasan.count()
             binding.commentCount.text = ulasan.toString()
 
-
-
         }
+
+        binding.btnGotoGoolemap.setOnClickListener {
+            val lokasi = viewModel.lokasiDetail.value?.data?.lokasi
+            if (lokasi != null) {
+                val latitude = lokasi.lat
+                val longitude = lokasi.long
+
+                val uri = "google.navigation:q=$latitude,$longitude"
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+                intent.setPackage("com.google.android.apps.maps")
+
+                if (intent.resolveActivity(requireContext().packageManager) != null) {
+                    startActivity(intent)
+                } else {
+                    // Tampilkan pesan jika Google Maps tidak tersedia
+                    Toast.makeText(
+                        requireContext(),
+                        "Google Maps tidak tersedia di perangkat ini",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } else {
+                Toast.makeText(requireContext(), "Lokasi tidak ditemukan", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
         viewModel.ulasanList.observe(viewLifecycleOwner) { ulasanList ->
             binding.comentIcon.setOnClickListener {
                 // Membuat instance KomentarBottomSheetFragment dan mengirimkan ID lokasi
@@ -105,5 +133,13 @@ class DetailLokasiFragment : Fragment() {
         super.onDestroyView()
         activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.VISIBLE
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val lokasiId = arguments?.getInt("lokasiId") ?: 0
+
+        viewModel.getLokasiDetail(lokasiId =lokasiId , "Bearer ${Sharedpreferencetoken(requireContext()).getToken()!!}")
+
     }
 }

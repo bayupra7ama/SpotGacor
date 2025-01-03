@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <TextView
@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/lokasi"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:paddingStart="16dp"
         android:textStyle="bold"
         android:fontFamily="@font/poppins_semibold"/>
@@ -29,26 +29,58 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
-        <!-- SearchView and icons layout -->
+        android:padding="8dp"
+        android:gravity="center_vertical">
+
+        <!-- Search View -->
+        <androidx.appcompat.widget.SearchView
+            android:background="@drawable/layout_shape"
+            android:id="@+id/search_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:iconifiedByDefault="false"
+            android:padding="0dp"
+            android:focusable="true"
+
+            android:layout_marginEnd="16dp" />
+
+
+        <!-- Icon 1 -->
+        <ImageView
+            android:id="@+id/icon_add"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/add"
+            android:contentDescription="@string/add_icon"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Icon 2 -->
+        <ImageView
+            android:id="@+id/icon_location"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/fish_map"
+            android:contentDescription="@string/location_icon" />
     </LinearLayout>
+
+
 
     <!-- SwipeRefreshLayout for pull-to-refresh -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+
+        android:focusableInTouchMode="false">
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/item_lokasi"
-            android:padding="6dp"/>
+            />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar

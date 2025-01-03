@@ -1,0 +1,17 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Layer untuk garis atas -->
+    <item android:left="0dp" android:right="0dp" android:top="0dp" android:bottom="0dp">
+        <shape>
+            <solid android:color="@android:color/transparent"/> <!-- Background transparan -->
+            <stroke android:color="#000000" android:width="1dp"/> <!-- Garis atas -->
+        </shape>
+    </item>
+
+    <!-- Layer untuk garis bawah -->
+    <item android:left="0dp" android:right="0dp" android:top="0dp" android:bottom="0dp">
+        <shape>
+            <solid android:color="@android:color/transparent"/> <!-- Background transparan -->
+            <stroke android:color="#000000" android:width="0.5dp"/> <!-- Garis bawah -->
+        </shape>
+    </item>
+</layer-list>

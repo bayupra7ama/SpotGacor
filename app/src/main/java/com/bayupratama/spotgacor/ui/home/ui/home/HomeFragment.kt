@@ -1,16 +1,17 @@
 package com.bayupratama.spotgacor.ui.home.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.bayupratama.spotgacor.R
-
-
 import com.bayupratama.spotgacor.databinding.FragmentHomeBinding
+import com.bayupratama.spotgacor.ui.home.ui.map.MapsActivity
+
+
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeFragment : Fragment() {
@@ -36,6 +37,13 @@ class HomeFragment : Fragment() {
         binding.btnLokasi.setOnClickListener {
             val bottomNavView = requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)
             bottomNavView.selectedItemId = R.id.navigation_lokasi
+        }
+        binding.storyButton.setOnClickListener {
+            val bottomNavView = requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)
+            bottomNavView.selectedItemId = R.id.navigation_story
+        }
+        binding.mapBtn.setOnClickListener {
+            startActivity(Intent(requireContext(), MapsActivity::class.java))
         }
 
     }

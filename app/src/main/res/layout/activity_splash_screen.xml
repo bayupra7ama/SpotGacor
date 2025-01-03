@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/icon_fish_point" />
+        android:src="@drawable/icon_fish_point" />
 
     <TextView
         android:id="@+id/textView2"

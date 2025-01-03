@@ -20,9 +20,41 @@ class Sharedpreferencetoken (context: Context) {
     fun getUsername() : String?{
         return sharedpreference.getString("name", null)
     }
+    fun saveUserData(name: String?, email: String?, profileImageUrl: String?) {
+        // Simpan data pengguna
+        editor.putString("name", name)
+        editor.putString("email", email)
+
+        // Simpan URL gambar profil
+        profileImageUrl?.let {
+            editor.putString("profileImageUrl", it)
+        }
+
+        editor.apply()
+    }
+
+    // Mengambil data pengguna
+    fun getUserName(): String? {
+        return sharedpreference.getString("name", null)
+    }
+
+    fun getUserEmail(): String? {
+        return sharedpreference.getString("email", null)
+    }
+
+
+
+    // Mengambil URL gambar profil
+    fun getProfileImageUrl(): String? {
+        return sharedpreference.getString("profileImageUrl", null)
+    }
 
     fun clearData(){
         editor.remove("token")
+        editor.remove("name")
+        editor.remove("email")
+        editor.remove("nomorHp")
+        editor.remove("profileImageUrl")
         editor.apply()
     }
 }

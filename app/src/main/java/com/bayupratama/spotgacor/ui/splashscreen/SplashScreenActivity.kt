@@ -10,7 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bayupratama.spotgacor.R
 import com.bayupratama.spotgacor.helper.Sharedpreferencetoken
-import com.bayupratama.spotgacor.ui.auth.register.RegisterActivity
+import com.bayupratama.spotgacor.ui.auth.login.LoginActivity
 import com.bayupratama.spotgacor.ui.home.MainActivity
 
 
@@ -40,7 +40,7 @@ class SplashScreenActivity : AppCompatActivity() {
         val token = sharedpreferencetoken.getToken()
         if (token.isNullOrEmpty()) {
             // Jika token kosong, arahkan ke RegisterActivity atau LoginActivity
-            startActivity(Intent(this@SplashScreenActivity, RegisterActivity::class.java))
+            startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java))
         } else {
             // Jika token tersedia, arahkan ke MainActivity
             startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))

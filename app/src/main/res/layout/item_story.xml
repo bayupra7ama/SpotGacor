@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/shape_rectangle_8_fff"
+    android:padding="16dp">
+
+    <!-- User Info -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingBottom="8dp">
+
+        <!-- Profile Picture -->
+        <ImageView
+            android:id="@+id/iv_user_provile"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/user_logo"
+            android:scaleType="centerCrop"
+            android:layout_marginEnd="8dp" />
+
+        <!-- User Name -->
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <!-- Image Section -->
+    <ImageView
+        android:id="@+id/iv_photo"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:src="@drawable/spot"
+        android:scaleType="centerCrop" />
+
+    <!-- Likes and Caption -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="8dp">
+
+        <!-- Likes -->
+
+        <TextView
+            android:id="@+id/tvCaption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+
+    <!-- Date Section -->
+    <TextView
+
+        android:id="@+id/tv_created_at"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@android:color/darker_gray"
+        android:paddingTop="8dp" />
+
+</LinearLayout>
