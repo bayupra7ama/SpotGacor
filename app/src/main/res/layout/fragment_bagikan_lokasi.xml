@@ -40,156 +40,137 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Header Description -->
+        <!-- Image Selection -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lengkapi semua data"
-            android:layout_marginTop="8dp"
+            android:text="Pilih Gambar"
+            android:layout_marginTop="16dp"
             android:textSize="14sp"
-            android:textColor="@android:color/darker_gray" />
+            android:textStyle="bold" />
 
-        <!-- Image -->
+        <!-- Horizontal ScrollView for selected images -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+            <LinearLayout
+                android:id="@+id/selectedImagesLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="start"/>
+        </HorizontalScrollView>
+        <LinearLayout
+            android:id="@+id/PlaceHolder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:gravity="start" />
+
+        <!-- Placeholder image -->
         <ImageView
             android:id="@+id/placeHolderImg"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@drawable/add_photo_place"
+            android:layout_marginTop="16dp"
+            android:contentDescription="Tambah gambar"
+            android:visibility="visible" />
+
+        <!-- Form Fields for input (Nama, Alamat, Rute) -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/nama_tempat">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextNamaTempat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/alamat">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/alamatEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/sarang_perlengkapan">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/saranPerlengkapanEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/rute_palce">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ruteEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/jenis_umpan">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/jenisUmpanEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/jenis_ikan_place">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/jenisIkanEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout><!-- Toggle Switch -->
+        <Switch
+            android:id="@+id/switchUseLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gunakan Lokasi Saya"
             android:layout_marginTop="16dp" />
 
-        <!-- Toggle Switch -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Gunakan lokasi saat ini"
-                android:layout_marginLeft="10dp"
-                android:textSize="16sp" />
-
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/switch_use_location" />
-        </LinearLayout>
-
-        <!-- Input Fields -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nama tempat"
-            android:layout_marginTop="16dp"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/nama_tempat_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/masukkan_deskripsi_rute"
-            android:inputType="textMultiLine"
-            android:lines="1"
-            android:gravity="top"
-            android:background="@drawable/edt_background" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alamat"
-            android:layout_marginTop="16dp"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/alamat_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/masukkan_deskripsi_rute"
-            android:inputType="textMultiLine"
-            android:lines="1"
-            android:gravity="top"
-            android:background="@drawable/edt_background" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rute"
-            android:layout_marginTop="16dp"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/rute_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/masukkan_deskripsi_rute"
-            android:inputType="textMultiLine"
-            android:lines="3"
-            android:gravity="top"
-            android:background="@drawable/edt_background" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Jenis Ikan"
-            android:layout_marginTop="16dp"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/jenis_ikan_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edt_background"
-            android:hint="Masukkan jenis ikan"
-            android:inputType="text" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:layout_marginTop="16dp"
-            android:text="Saran Perlengkapan"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/saran_perlengkapan_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Masukkan saran perlengkapan"
-            android:inputType="textMultiLine"
-            android:lines="3"
-            android:gravity="top"
-            android:background="@drawable/edt_background" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rekomendasi Umpan"
-            android:layout_marginTop="16dp"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/jenis_umpan_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edt_background"
-            android:hint="Masukkan rekomendasi umpan"
-            android:inputType="text" />
-
-        <!-- Upload Button -->
+        <!-- Button Upload -->
         <Button
             android:id="@+id/btn_upload"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Upload"
-            android:layout_marginTop="24dp"
+            android:text="@string/upload"
             android:textColor="@android:color/white"
-            android:padding="12dp" />
+            android:layout_marginTop="24dp" />
     </LinearLayout>
 </ScrollView>

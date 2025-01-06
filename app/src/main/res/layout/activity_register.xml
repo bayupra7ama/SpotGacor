@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/register_actifity"
+    android:background="@color/white"
     tools:context=".ui.auth.register.RegisterActivity">
 
 
@@ -72,12 +73,12 @@
                 <EditText
                     android:id="@+id/edt_nama"
                     android:layout_width="0dp"
+                    android:background="@color/white"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/poppins"
                     android:hint="@string/user_name"
                     android:inputType="textEmailAddress"
-                    android:textColor="#000000"
                     android:textSize="12sp" />
             </LinearLayout>
 
@@ -106,6 +107,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/poppins"
                     android:hint="@string/email"
+                    android:background="@color/white"
                     android:inputType="textEmailAddress"
                     android:textColor="#000000"
                     android:textSize="12sp" />
@@ -137,6 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/poppins"
+                    android:background="@color/white"
                     android:hint="@string/nomor_hp"
                     android:inputType="textEmailAddress"
                     android:textSize="12sp" />

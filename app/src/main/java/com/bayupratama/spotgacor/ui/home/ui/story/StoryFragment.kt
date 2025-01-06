@@ -1,5 +1,6 @@
 package com.bayupratama.spotgacor.ui.home.ui.story
 
+import StoryPagingAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bayupratama.spotgacor.databinding.FragmentStoryBinding
 import com.bayupratama.spotgacor.data.retrofit.ApiConfig
 import com.bayupratama.spotgacor.helper.StoryViewModelFactory
-import com.bayupratama.spotgacor.ui.adapter.StoryPagingAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

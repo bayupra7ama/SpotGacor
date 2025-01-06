@@ -1,5 +1,6 @@
 package com.bayupratama.spotgacor.ui.home.ui.lokasi
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,7 @@ import androidx.paging.LoadState
 import com.bayupratama.spotgacor.R
 import com.bayupratama.spotgacor.helper.LokasiViewModelFactory
 import com.bayupratama.spotgacor.ui.adapter.LokasiPagingAdapter
+import com.bayupratama.spotgacor.ui.home.ui.map.MapsActivity
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -74,6 +76,11 @@ class LokasiFragment : Fragment() {
                 R.id.action_navigation_lokasi_to_detailLokasiFragment,
                 bundle
             )
+        }
+
+        binding.iconLocation.setOnClickListener{
+            val intent = Intent(requireContext(), MapsActivity::class.java)
+            startActivity(intent)
         }
 
         binding.recyclerView.apply {

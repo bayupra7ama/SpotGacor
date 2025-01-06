@@ -8,15 +8,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bayupratama.spotgacor.R
 import com.bayupratama.spotgacor.databinding.FragmentBagikanLokasiBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BagikanLokasiFragment : Fragment() {
 
@@ -35,6 +38,8 @@ class BagikanLokasiFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.GONE
+
         super.onViewCreated(view, savedInstanceState)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         viewModel = ViewModelProvider(this).get(BagikanLokasiViewModel::class.java)
@@ -94,10 +99,47 @@ class BagikanLokasiFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris ->
             selectedImages.clear()
             selectedImages.addAll(uris)
+            updateSelectedImagesView()
         }
 
+    private fun updateSelectedImagesView() {
+        // Menghapus gambar lama
+        binding.selectedImagesLayout.removeAllViews()
+
+        if (selectedImages.isEmpty()) {
+            binding.placeHolderImg.visibility = View.VISIBLE
+        } else {
+            binding.placeHolderImg.visibility = View.GONE
+        }
+        // Menambahkan gambar baru
+        selectedImages.forEach { uri ->
+            val imageView = ImageView(requireContext())
+            imageView.setImageURI(uri)
+            imageView.layoutParams = ViewGroup.LayoutParams(600, 400) // Ganti ukuran sesuai kebutuhan
+            imageView.setOnClickListener {
+                // Mengganti gambar jika di klik
+                pickMultipleImages()
+            }
+
+            // Menambahkan tombol hapus untuk setiap gambar
+            val deleteButton = ImageView(requireContext())
+            deleteButton.setImageResource(android.R.drawable.ic_menu_close_clear_cancel)
+            deleteButton.layoutParams = ViewGroup.LayoutParams(100, 50)
+            deleteButton.setOnClickListener {
+                // Menghapus gambar yang dipilih
+                selectedImages.remove(uri)
+                updateSelectedImagesView()
+            }
+
+            // Menambahkan gambar dan tombol hapus ke dalam layout
+            binding.selectedImagesLayout.addView(imageView)
+            binding.selectedImagesLayout.addView(deleteButton)
+        }
+    }
+
+
     private fun uploadData() {
-        val namaTempat = binding.namaTempatEditText.text.toString()
+        val namaTempat = binding.editTextNamaTempat.text.toString()
         val alamat = binding.alamatEditText.text.toString()
         val perlengkapan = binding.saranPerlengkapanEditText.text.toString()
         val rute = binding.ruteEditText.text.toString()
@@ -116,6 +158,8 @@ class BagikanLokasiFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.VISIBLE
+
         _binding = null
     }
 

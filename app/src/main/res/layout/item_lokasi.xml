@@ -47,6 +47,8 @@
                 android:layout_height="wrap_content"
                 android:numStars="5"
                 android:stepSize="0.5"
+                android:progressTint="@color/warna_terisi"
+            android:secondaryProgressTint="@color/warna_belum_terisi"
                 android:rating="4.5"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="6dp"

@@ -72,4 +72,10 @@
     <string name="terrain_type">terrain</string>
     <string name="hybrid_type">hybrid</string>
     <string name="logut">Logout</string>
+    <string name="nama_tempat">Nama Tempat</string>
+    <string name="alamat">alamat</string>
+    <string name="sarang_perlengkapan">sarang perlengkapan</string>
+    <string name="rute_palce">rute</string>
+    <string name="jenis_umpan">jenis umpan</string>
+    <string name="jenis_ikan_place">jenis ikan</string>
 </resources>

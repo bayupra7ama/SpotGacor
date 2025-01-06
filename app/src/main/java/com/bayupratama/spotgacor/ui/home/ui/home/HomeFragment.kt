@@ -45,6 +45,11 @@ class HomeFragment : Fragment() {
         binding.mapBtn.setOnClickListener {
             startActivity(Intent(requireContext(), MapsActivity::class.java))
         }
+        binding.btnProfile.setOnClickListener {
+
+            val bottomNavView = requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)
+            bottomNavView.selectedItemId = R.id.navigation_profile
+        }
 
     }
 

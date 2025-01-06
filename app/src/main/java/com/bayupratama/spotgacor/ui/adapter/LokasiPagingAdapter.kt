@@ -39,7 +39,7 @@ class LokasiPagingAdapter(
             binding.nameTextView.text = lokasi.namaTempat
 
             // Mengatur deskripsi lokasi
-            binding.descriptionTextView.text = lokasi.rute
+            binding.descriptionTextView.text = lokasi.jenisIkan
 
             // Mengatur rating lokasi
             binding.ratingBar.rating = lokasi.averageRating?.toFloat() ?: 0f
