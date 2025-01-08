@@ -2,12 +2,17 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.SpotGacor" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Primary colors -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+
+        <!-- Background and surface -->
+        <item name="android:colorBackground">@color/colorBackground</item>
+<!--        <item name="android:colorSurface">@color/colorSurface</item>-->
+
+        <!-- Text colors -->
     </style>
 
     <style name="Theme.SpotGacor" parent="Base.Theme.SpotGacor" />
-    <style name="RatingBar">
-        <item name="colorControlNormal">#ECECEC</item>
-        <item name="colorControlActivated">#FFC700</item>
-    </style>
+
 </resources>

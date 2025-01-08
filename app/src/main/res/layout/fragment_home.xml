@@ -29,6 +29,7 @@
                 android:layout_marginBottom="3dp"
                 android:layout_weight="1"
                 android:textStyle="bold"
+                android:textColor="@color/colorOnBackground"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/judul"
                 android:textSize="26sp" />
