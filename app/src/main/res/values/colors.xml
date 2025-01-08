@@ -1,9 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Warna Dasar -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="warna_terisi">#FF9800</color>
+    <!-- Warna Utama -->
+    <color name="colorPrimary">#0288D1</color>
+    <color name="colorPrimaryDark">#01579B</color>
+    <color name="colorAccent">#7E57C2</color>
 
-    <color name="warna_belum_terisi">#BDBDBD</color>
+    <!-- Secondary Colors -->
+    <color name="colorSecondary">#4CAF50</color>
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorSurface">#F5F5F5</color>
+
+    <!-- Text Colors -->
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorTextPrimary">#212121</color>
+    <color name="colorTextSecondary">#757575</color>
+    <color name="colorOnSecondary">#FFFFFF</color> <!-- Teks di atas Secondary -->
+    <color name="colorOnBackground">#212121</color> <!-- Teks utama -->
+    <color name="colorOnSurface">#757575</color> <!-- Teks sekunder -->
+
+    <!-- Additional Colors -->
+    <color name="colorWarning">#FF5722</color> <!-- Oranye -->
+    <color name="colorHighlight">#B2EBF2</color> <!-- Turquoise -->
+    <color name="colorAccentLight">#FFD54F</color> <!-- Kuning Cerah -->
+
+    <!-- Warna Aksen -->
+    <color name="accent">#F2994A</color>
+    <color name="warning">#FFCC00</color>
+    <color name="error">#FF6F61</color>
+
+    <!-- Warna Khusus -->
+    <color name="warna_terisi">#FFCC00</color> <!-- Hijau untuk elemen yang sudah terisi -->
+    <color name="warna_belum_terisi">#BDBDBD</color> <!-- Abu-abu untuk elemen kosong -->
 </resources>

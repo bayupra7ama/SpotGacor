@@ -4,19 +4,27 @@
     <item
         android:id="@+id/navigation_home"
         android:title="@string/title_home"
+
+        android:icon="@drawable/ic_home"
         
         />
 
     <item
         android:id="@+id/navigation_lokasi"
+        android:icon="@drawable/list_lokasi"
         android:title="@string/lokasi"/>
     <item
 
         android:id="@+id/navigation_story"
-        android:title="@string/story"/>
+        android:title="@string/story"
+        android:icon="@drawable/ic_story"
+        />
 
     <item
         android:id="@+id/navigation_profile"
-        android:title="@string/profile"/>
+        android:icon="@drawable/profile_icon"
+        android:title="@string/profile"
+
+        />
 
 </menu>

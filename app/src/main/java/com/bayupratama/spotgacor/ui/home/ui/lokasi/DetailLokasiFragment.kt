@@ -50,6 +50,12 @@ class DetailLokasiFragment : Fragment() {
         sharedpreferencetoken = Sharedpreferencetoken(requireContext())
         val token = "Bearer " + sharedpreferencetoken.getToken().toString()
 
+
+        
+        binding.backImg.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
+
         viewModel.getLokasiDetail(lokasiId, token)
         viewModel.lokasiDetail.observe(viewLifecycleOwner) { response ->
             val lokasi = response.data.lokasi

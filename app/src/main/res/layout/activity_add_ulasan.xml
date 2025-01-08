@@ -32,6 +32,8 @@
         android:numStars="5"
         style="@style/Widget.AppCompat.RatingBar.Small"
         android:stepSize="1.0"
+        android:progressTint="@color/warna_terisi"
+        android:secondaryProgressTint="@color/warna_belum_terisi"
         android:isIndicator="false" />
 
     <!-- Input Komentar -->
