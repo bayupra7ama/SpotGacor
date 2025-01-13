@@ -46,7 +46,6 @@ class LokasiFragment : Fragment() {
         }
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -61,11 +60,9 @@ class LokasiFragment : Fragment() {
                 return true
             }
         })
-
         binding.iconAdd.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_lokasi_to_bagikanLokasiFragment)
         }
-
         lokasiAdapter = LokasiPagingAdapter { lokasiItem ->
             val bundle = Bundle().apply {
                 putInt("lokasiId", lokasiItem.id ?: 0)
@@ -77,22 +74,17 @@ class LokasiFragment : Fragment() {
                 bundle
             )
         }
-
         binding.iconLocation.setOnClickListener{
             val intent = Intent(requireContext(), MapsActivity::class.java)
             startActivity(intent)
         }
-
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = lokasiAdapter
         }
-
-        // Handle swipe-to-refresh
         binding.swipeRefreshLayout.setOnRefreshListener {
             lokasiAdapter.refresh()
         }
-
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.lokasiPagingData.collectLatest { pagingData ->
@@ -100,29 +92,21 @@ class LokasiFragment : Fragment() {
                 }
             }
         }
-
-
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-
                 lokasiAdapter.loadStateFlow.collectLatest { loadStates ->
                     binding.progressBar.visibility =
                         if (loadStates.refresh is LoadState.Loading) View.VISIBLE else View.GONE
                     binding.swipeRefreshLayout.isRefreshing =
                         loadStates.refresh is LoadState.Loading
-
                 }
             }
         }
-
     }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null  // Hindari akses binding setelah fragment dihancurkan
     }
-
-
-
 }
 
 

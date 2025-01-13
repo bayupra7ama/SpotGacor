@@ -10,13 +10,14 @@ import com.bayupratama.spotgacor.data.retrofit.ApiService
 
 class StoryRepository(private val apiService: ApiService) {
 
+    // Fungsi untuk mengambil data cerita
     fun getStories(): Flow<PagingData<DataItem>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 10,
-                enablePlaceholders = false
+                pageSize = 10, // Menentukan ukuran setiap halaman data
+                enablePlaceholders = false // Menonaktifkan placeholder
             ),
-            pagingSourceFactory = { StoryPagingSource(apiService) }
-        ).flow
+            pagingSourceFactory = { StoryPagingSource(apiService) } // Menentukan sumber data
+        ).flow // Mengembalikan flow data paging
     }
 }

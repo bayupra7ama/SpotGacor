@@ -53,6 +53,7 @@ class ProfileFragment : Fragment() {
             Glide.with(requireContext())
                 .load(imagePhoto)
                 .error(R.drawable.user_logo)
+                .circleCrop()
                 .into(binding.ivPicture)
 
         // Gambar akan dimuat ke dalam ImageView

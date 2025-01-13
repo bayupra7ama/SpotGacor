@@ -22,65 +22,75 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BagikanLokasiFragment : Fragment() {
-
     private var _binding: FragmentBagikanLokasiBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var viewModel: BagikanLokasiViewModel
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var selectedImages: MutableList<Uri> = mutableListOf()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBagikanLokasiBinding.inflate(inflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.GONE
-
         super.onViewCreated(view, savedInstanceState)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-        viewModel = ViewModelProvider(this).get(BagikanLokasiViewModel::class.java)
-
+        viewModel = ViewModelProvider(this)[BagikanLokasiViewModel::class.java]
         binding.placeHolderImg.setOnClickListener {
             pickMultipleImages()
         }
 
         binding.switchUseLocation.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                fetchUserLocation()
+                fetchUserLocation { success ->
+                    if (!success) {
+                        Toast.makeText(requireContext(), "Gagal Mendapatkan Lokasi. Silahkan Coba Lagi.", Toast.LENGTH_SHORT).show()
+                        binding.switchUseLocation.isChecked = false
+                    }
+                }
             } else {
                 viewModel.lat = null
                 viewModel.long = null
             }
         }
 
-
+        if (viewModel.lat == null && viewModel.long == null ) {
+            binding.switchUseLocation.isChecked = false
+        }
         binding.btnUpload.setOnClickListener {
             uploadData()
         }
-
         observeViewModel()
     }
-
     private fun observeViewModel() {
         viewModel.uploadResult.observe(viewLifecycleOwner) { result ->
+            binding.progressBar.visibility = View.GONE
+            binding.btnUpload.isEnabled = true
             Toast.makeText(requireContext(), result, Toast.LENGTH_LONG).show()
+            if (result.contains("Upload Successful")) {
+                // Tutup halaman setelah berhasil
+                parentFragmentManager.popBackStack()
+            }
         }
     }
 
-    private fun fetchUserLocation() {
+    private fun fetchUserLocation(callback: (Boolean) -> Unit) {
         if (ContextCompat.checkSelfPermission(
                 requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-                location?.let {
-                    viewModel.lat = it.latitude
-                    viewModel.long = it.longitude
-                } ?: Toast.makeText(requireContext(), "Failed to get location", Toast.LENGTH_SHORT).show()
+                if (location != null) {
+                    viewModel.lat = location.latitude
+                    viewModel.long = location.longitude
+                    callback(true)
+                } else {
+                    callback(false)
+                }
+            }.addOnFailureListener {
+                callback(false)
             }
         } else {
             ActivityCompat.requestPermissions(
@@ -88,8 +98,10 @@ class BagikanLokasiFragment : Fragment() {
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_PERMISSION_REQUEST_CODE
             )
+            callback(false)
         }
     }
+
 
     private fun pickMultipleImages() {
         pickMultipleMedia.launch("image/*")
@@ -150,7 +162,8 @@ class BagikanLokasiFragment : Fragment() {
             Toast.makeText(requireContext(), "Please fill all required fields", Toast.LENGTH_SHORT).show()
             return
         }
-
+        binding.progressBar.visibility = View.VISIBLE
+        binding.btnUpload.isEnabled = false
         viewModel.uploadData(
             namaTempat, alamat, perlengkapan, rute, umpan, jenisIkan, selectedImages, requireContext()
         )

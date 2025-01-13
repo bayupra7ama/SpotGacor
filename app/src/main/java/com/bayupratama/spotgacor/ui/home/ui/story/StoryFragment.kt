@@ -25,6 +25,7 @@ class StoryFragment : Fragment() {
         StoryViewModelFactory(ApiConfig.getApiService(requireContext()))
     }
 
+    // Fungsi ini dipanggil saat tampilan fragment dibuat
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,56 +34,57 @@ class StoryFragment : Fragment() {
         return binding.root
     }
 
+    // Fungsi ini dipanggil setelah tampilan fragment selesai dibuat
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Menambahkan aksi saat tombol 'addStory' diklik untuk membuka AddStoryActivity
         binding.addStory.setOnClickListener {
             val intent = Intent(requireContext(), AddStoryActivity::class.java)
             startActivity(intent)
         }
 
+        // Menyiapkan adapter untuk menampilkan data dengan Paging
         val adapter = StoryPagingAdapter()
         binding.recyclerViewStories.apply {
-            layoutManager = LinearLayoutManager(context)
-            this.adapter = adapter
+            layoutManager = LinearLayoutManager(context) // Menentukan layout untuk RecyclerView
+            this.adapter = adapter // Menetapkan adapter ke RecyclerView
         }
 
-        // Setup SwipeRefreshLayout
+        // Menyiapkan SwipeRefreshLayout untuk refresh data
         binding.swipeRefreshLayout.setOnRefreshListener {
-            refreshStories(adapter)
+            refreshStories(adapter) // Memanggil fungsi untuk refresh data
         }
 
-
-
-
-
-        // Load initial data
+        // Memulai pengamatan data cerita
         observeStories(adapter)
     }
 
+    // Fungsi untuk merefresh data ketika swipe refresh dilakukan
     private fun refreshStories(adapter: StoryPagingAdapter) {
-        binding.swipeRefreshLayout.isRefreshing = true // Show refresh indicator
-        adapter.refresh() // Request fresh data
+        binding.swipeRefreshLayout.isRefreshing = true // Menampilkan indikator refresh
+        adapter.refresh() // Meminta data baru
 
-        // Tambahkan timeout untuk menghentikan indikator jika tidak ada respons
+        // Menambahkan delay untuk menghentikan indikator refresh jika tidak ada respons dalam 3 detik
         viewLifecycleOwner.lifecycleScope.launch {
             kotlinx.coroutines.delay(3000) // Timeout 3 detik
             if (binding.swipeRefreshLayout.isRefreshing) {
-                binding.swipeRefreshLayout.isRefreshing = false // Force hide
+                binding.swipeRefreshLayout.isRefreshing = false // Menyembunyikan indikator refresh
             }
         }
     }
 
+    // Fungsi untuk mengamati data cerita dari ViewModel
     private fun observeStories(adapter: StoryPagingAdapter) {
         viewLifecycleOwner.lifecycleScope.launch {
             storyViewModel.stories.collectLatest { pagingData ->
-                adapter.submitData(pagingData)
-                binding.swipeRefreshLayout.isRefreshing = false // Hide refresh indicator
+                adapter.submitData(pagingData) // Mengirim data ke adapter
+                binding.swipeRefreshLayout.isRefreshing = false // Menyembunyikan indikator refresh setelah data diterima
             }
         }
     }
 
-
+    // Fungsi untuk membersihkan binding saat tampilan fragment dihancurkan
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
