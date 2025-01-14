@@ -1,14 +1,8 @@
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import android.graphics.drawable.Drawable
-import android.os.Handler
-import android.os.Looper
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +11,7 @@ import com.bayupratama.spotgacor.data.response.DataItem
 import com.bayupratama.spotgacor.databinding.ItemStoryBinding
 import com.bayupratama.spotgacor.helper.formatDateString
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.GlideException
+import com.squareup.picasso.Picasso
 
 class StoryPagingAdapter :
     PagingDataAdapter<DataItem, StoryPagingAdapter.StoryViewHolder>(DiffCallback) {
@@ -48,29 +42,30 @@ class StoryPagingAdapter :
             binding.tvCaption.text = story.isiStory
             binding.tvCreatedAt.text = formatDateString(story.createdAt)
 
-            // Memuat foto profil dengan retry
+            // Memuat foto profil dengan retry dan cache
             if (story.user?.profilePhotoUrl != null) {
                 Glide.with(binding.root.context)
                     .load(story.user.profilePhotoUrl) // Menggunakan URL gambar profil
                     .diskCacheStrategy(DiskCacheStrategy.ALL) // Menggunakan cache untuk menghindari pemuatan ulang gambar
                     .placeholder(R.drawable.user_logo) // Menampilkan placeholder sementara
-                    .circleCrop()
+                    .circleCrop() // Memotong gambar menjadi bulat
                     .error(R.drawable.user_logo) // Menampilkan gambar error jika gagal memuat
-                    .into(binding.ivUserProvile)
+                    .into(binding.ivUserProvile) // Memasukkan gambar ke dalam ImageView
             }
 
             val url = "https://brief-sawfly-square.ngrok-free.app/"
             val photoUrl = url + story.photoUrl
 
-            // Memuat foto cerita dengan retry
+            // Memuat foto cerita dengan retry dan cache
             if (story.photoUrl != null) {
+                binding.ivPhoto.visibility = View.VISIBLE
                 Glide.with(binding.root.context)
-                    .load(photoUrl) // Memuat URL foto cerita
-                    .diskCacheStrategy(DiskCacheStrategy.ALL) // Cache gambar untuk menghindari pemuatan ulang
-                    .placeholder(R.drawable.ic_placeholder) // Menampilkan placeholder sementara
-                    .into(binding.ivPhoto) // Memuat gambar ke dalam ImageView
-            } else {
-                binding.ivPhoto.visibility = View.GONE // Menyembunyikan ImageView jika tidak ada gambar
+                    .load(photoUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL) // Cache untuk menyimpan gambar secara lokal
+                    .into(binding.ivPhoto)
+            }else{
+                binding.ivPhoto.visibility = View.GONE
+
             }
         }
     }
@@ -88,5 +83,6 @@ class StoryPagingAdapter :
         }
     }
 }
+
 
 

@@ -59,15 +59,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation ("com.github.bumptech.glide:glide:4.12.0" )// Pastikan menggunakan versi terbaru
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 
-
-    implementation(libs.glide)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
 
     implementation(libs.kotlin.stdlib)
-
+    implementation ("com.squareup.picasso:picasso:2.8")
     implementation(libs.androidx.viewpager2)
     implementation( libs.androidx.paging.runtime.ktx)
     implementation(libs.androidx.navigation.fragment.ktx.v274)
