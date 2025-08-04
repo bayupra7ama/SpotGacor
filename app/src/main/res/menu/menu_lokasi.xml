@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_add_location"
+        android:title="Tambah Lokasi" />
+    <item
+        android:id="@+id/menu_open_map"
+        android:title="Lihat Peta" />
+    <item
+        android:id="@+id/menu_filter_fish"
+        android:title="Pilih Jenis Ikan" />
+</menu>

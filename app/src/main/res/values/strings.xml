@@ -50,6 +50,9 @@
     <string name="bait">umpan : %1$s</string>
     <string name="rating">%.1f</string>
     <string name="komentar">Komentar</string>
+
+    <string name="tampilkan_ulasan">&lt;&lt; Tampilkan Ulasan (%1$s) &gt;&gt;</string>
+
     <string name="ulasan">Ulasan (%1$s)</string>
     <string name="add_icon">Add Icon</string>
     <string name="location_icon">Location Icon</string>
@@ -79,4 +82,12 @@
     <string name="jenis_umpan">jenis umpan</string>
     <string name="jenis_ikan_place">jenis ikan</string>
     <string name="rute_perjalanan">Rute Perjalanan</string>
+    <string name="medan_jalan">medan jalan : %1$s</string>
+    <string name="nama_tempatt">Nama Tempat</string>
+    <string name="share_lokasi">bagiakan lokasi</string>
+    <string name="change_password_icon">ganti password</string>
+    <string name="change_password">ganti password</string>
+    <string name="add_story_button_text">tambahkan story</string>
+    <string name="story_tidak_tersedia">tidak ada story tersedia</string>
+    <string name="medan">medan jalan</string>
 </resources>

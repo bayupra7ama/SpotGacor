@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,7 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SpotGacor"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.home.ui.map.WebViewActivity"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -32,11 +37,23 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBqPQ6PSd7K9erw6rZ9IPwoP2SSfXK7bac" />
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
         <activity
             android:name=".ui.home.ui.map.MapsActivity"
-            android:theme="@style/Theme.AppCompat.DayNight"
             android:exported="false"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:theme="@style/Theme.AppCompat.DayNight"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            />
         <activity
             android:name=".ui.home.ui.story.AddStoryActivity"
             android:exported="false" />

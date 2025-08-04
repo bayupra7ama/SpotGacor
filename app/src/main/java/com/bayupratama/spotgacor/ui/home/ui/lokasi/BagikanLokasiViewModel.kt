@@ -30,6 +30,7 @@ class BagikanLokasiViewModel : ViewModel() {
         rute: String,
         umpan: String,
         jenisIkan: String?,
+        medan:String,
         selectedImages: List<Uri>,
         context: Context
     ) {
@@ -43,6 +44,8 @@ class BagikanLokasiViewModel : ViewModel() {
                 val perlengkapanBody = perlengkapan.toRequestBody("text/plain".toMediaTypeOrNull())
                 val ruteBody = rute.toRequestBody("text/plain".toMediaTypeOrNull())
                 val umpanBody = umpan.toRequestBody("text/plain".toMediaTypeOrNull())
+                val medanBody = medan.toRequestBody("text/plain".toMediaTypeOrNull())
+
                 val jenisIkanBody = jenisIkan?.toRequestBody("text/plain".toMediaTypeOrNull())
                 val latBody = lat?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
                 val longBody = long?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -59,8 +62,9 @@ class BagikanLokasiViewModel : ViewModel() {
 
                 // Kirim request ke API
                 val response = apiService.addLokasi(
-                    namaTempatBody, alamatBody, perlengkapanBody, ruteBody, umpanBody, jenisIkanBody,
-                    latBody, longBody, imageParts
+                    namaTempat = namaTempatBody, alamat = alamatBody, perlengkapan =  perlengkapanBody,
+                    rute = ruteBody, umpan =  umpanBody, jenisIkan =  jenisIkanBody , medan = medanBody,
+                   lat =  latBody, long =  longBody, images =  imageParts
                 )
 
                 if (response.isSuccessful) {

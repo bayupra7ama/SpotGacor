@@ -59,6 +59,45 @@ class DetailLokasiFragment : Fragment() {
         binding.backImg.setOnClickListener {
             parentFragmentManager.popBackStack() // Kembali ke halaman sebelumnya
         }
+        binding.btnShareLokasi.setOnClickListener {
+            val lokasi = viewModel.lokasiDetail.value?.data?.lokasi
+            if (lokasi != null) {
+                val namaTempat = lokasi.nama_tempat
+                val latitude = lokasi.lat
+                val longitude = lokasi.long
+                val alamat = lokasi.alamat
+                val jenisIkan = lokasi.jenis_ikan
+                // Gunakan URL Google Maps yang benar dengan latitude dan longitude
+                val mapsUrl = "http://maps.google.com/?q=$latitude,$longitude"
+
+                val message = """
+            Yuk cek lokasi mancing recommended!
+            📍 Nama Tempat: $namaTempat
+            🎣 Jenis Ikan: $jenisIkan
+            📫 Alamat: $alamat
+            🌐 Lokasi Maps: $mapsUrl
+        """.trimIndent()
+
+                // Buat Intent untuk membagikan teks
+                val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, message)
+                }
+
+                // Buat chooser Intent
+                // Ini akan menampilkan dialog pop-up yang memungkinkan pengguna memilih aplikasi
+                val chooser = Intent.createChooser(shareIntent, "Bagikan lokasi melalui...")
+
+                // Pastikan ada aplikasi yang dapat menangani intent ini
+                if (shareIntent.resolveActivity(requireContext().packageManager) != null) {
+                    startActivity(chooser)
+                } else {
+                    Toast.makeText(requireContext(), "Tidak ada aplikasi yang tersedia untuk membagikan.", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(requireContext(), "Data lokasi belum tersedia.", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         // Memanggil ViewModel untuk mendapatkan detail lokasi berdasarkan ID dan token
         viewModel.getLokasiDetail(lokasiId, token)
@@ -89,13 +128,18 @@ class DetailLokasiFragment : Fragment() {
             binding.jenisIkan.text = getString(R.string.fish_type, lokasi.jenis_ikan)
             binding.saranPerlengkapan.text = getString(R.string.equipment_suggestion, lokasi.perlengkapan)
             binding.umpan.text = getString(R.string.bait, lokasi.umpan)
+            binding.medan.text = getString(R.string.medan_jalan, lokasi.medan)
 
             // Menampilkan rating dan jumlah ulasan
             binding.ratingBar.rating = response.data.average_rating.toFloat()
             val rating = response.data.average_rating.toFloat()
             binding.ratingCount.text = getString(R.string.rating, rating)
-            val ulasan = response.data.ulasan.count()
-            binding.commentCount.text = ulasan.toString()
+
+            val ulasanCount = response.data.ulasan.count()
+            val tampilkanUlasan = getString(R.string.tampilkan_ulasan, ulasanCount.toString())
+
+            binding.comentIcon.text = tampilkanUlasan
+
         }
 
         // Menangani aksi tombol untuk membuka lokasi di Google Maps

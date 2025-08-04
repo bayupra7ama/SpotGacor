@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bayupratama.spotgacor.data.response.LokasiItem
 import com.bayupratama.spotgacor.databinding.ItemLokasiBinding
 import com.bumptech.glide.Glide
+import java.text.DecimalFormat
 
 class LokasiPagingAdapter(
     private val onItemClick: (LokasiItem) -> Unit
@@ -39,10 +40,29 @@ class LokasiPagingAdapter(
             binding.nameTextView.text = lokasi.namaTempat
 
             // Mengatur deskripsi lokasi
-            binding.descriptionTextView.text = lokasi.jenisIkan
+            binding.fishTypeTextView.text = lokasi.jenisIkan
 
             // Mengatur rating lokasi
-            binding.ratingBar.rating = lokasi.averageRating?.toFloat() ?: 0f
+            binding.ratingBar.rating = lokasi.averageRating?.toFloat() ?: 2f
+
+
+
+            val formatter = DecimalFormat("#.#")
+
+            val ratingString = try {
+                val rating = lokasi.averageRating.toString().toDoubleOrNull() ?: 0.0
+                formatter.format(rating)
+            } catch (e: Exception) {
+                "0.0" // fallback jika tetap error
+            }
+
+            binding.ratingCountTextView.text = ratingString
+
+
+            binding.descriptionTextView.text = lokasi.rute
+            binding.medanTextView.text = lokasi.medan
+            binding.distanceTextView.text = lokasi.alamat
+
 
             // Mengatur gambar lokasi
             val imageUrl = lokasi.imagePaths?.firstOrNull()?.let { path ->

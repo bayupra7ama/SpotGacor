@@ -80,6 +80,7 @@ dependencies {
     implementation(libs.play.services.location)
     implementation (libs.compressor)
 
+    implementation ("id.zelory:compressor:3.0.1")
 
 
 }

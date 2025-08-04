@@ -1,6 +1,7 @@
 package com.bayupratama.spotgacor.ui.home.ui.lokasi
 
 import android.Manifest
+import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.location.Location
 import android.net.Uri
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bayupratama.spotgacor.R
@@ -20,6 +22,7 @@ import com.bayupratama.spotgacor.databinding.FragmentBagikanLokasiBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.io.File
 
 class BagikanLokasiFragment : Fragment() {
     private var _binding: FragmentBagikanLokasiBinding? = null
@@ -39,7 +42,12 @@ class BagikanLokasiFragment : Fragment() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         viewModel = ViewModelProvider(this)[BagikanLokasiViewModel::class.java]
         binding.placeHolderImg.setOnClickListener {
-            pickMultipleImages()
+            showImageSourceDialog() // buka pilihan galeri/kamera
+        }
+
+
+        binding.backImg.setOnClickListener {
+            parentFragmentManager.popBackStack() // Kembali ke halaman sebelumnya
         }
 
         binding.switchUseLocation.setOnCheckedChangeListener { _, isChecked ->
@@ -62,6 +70,8 @@ class BagikanLokasiFragment : Fragment() {
         binding.btnUpload.setOnClickListener {
             uploadData()
         }
+
+
         observeViewModel()
     }
     private fun observeViewModel() {
@@ -157,6 +167,7 @@ class BagikanLokasiFragment : Fragment() {
         val rute = binding.ruteEditText.text.toString()
         val umpan = binding.jenisUmpanEditText.text.toString()
         val jenisIkan = binding.jenisIkanEditText.text.toString()
+        val medan = binding.medanEditText.text.toString()
 
         if (namaTempat.isEmpty() || alamat.isEmpty() || viewModel.lat == null || viewModel.long == null) {
             Toast.makeText(requireContext(), "Please fill all required fields", Toast.LENGTH_SHORT).show()
@@ -165,7 +176,7 @@ class BagikanLokasiFragment : Fragment() {
         binding.progressBar.visibility = View.VISIBLE
         binding.btnUpload.isEnabled = false
         viewModel.uploadData(
-            namaTempat, alamat, perlengkapan, rute, umpan, jenisIkan, selectedImages, requireContext()
+            namaTempat, alamat, perlengkapan, rute, umpan, jenisIkan, medan,selectedImages, requireContext()
         )
     }
 
@@ -175,6 +186,42 @@ class BagikanLokasiFragment : Fragment() {
 
         _binding = null
     }
+
+    private var tempImageUri: Uri? = null
+
+    private val launcherCamera = registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+        if (success && tempImageUri != null) {
+            selectedImages.add(tempImageUri!!)
+            updateSelectedImagesView()
+        }
+    }
+
+    private fun showImageSourceDialog() {
+        val options = arrayOf("Ambil dari Kamera", "Pilih dari Galeri")
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Pilih Gambar")
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> openCamera()
+                    1 -> pickMultipleImages()
+                }
+            }
+            .show()
+    }
+
+    private fun openCamera() {
+        val imageFile = File(requireContext().cacheDir, "temp_image_${System.currentTimeMillis()}.jpg")
+        tempImageUri = FileProvider.getUriForFile(
+            requireContext(),
+            "${requireContext().packageName}.provider",
+            imageFile
+        )
+        launcherCamera.launch(tempImageUri)
+    }
+
+
+
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 100

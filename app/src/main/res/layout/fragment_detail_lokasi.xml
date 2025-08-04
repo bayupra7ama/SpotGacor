@@ -93,17 +93,17 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
                 <ImageView
-                    android:id="@+id/coment_icon"
+                    android:id="@+id/btn_share_lokasi"
                     android:layout_width="25dp"
+                    android:clickable="true"
                     android:layout_height="25dp"
                     android:layout_marginStart="20dp"
-                    android:src="@drawable/icon_coment" />
-                <TextView
-                    android:id="@+id/commentCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:text="@string/_1" />
+                    android:contentDescription="@string/share_lokasi"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+
+                    android:src="@drawable/ic_share" />
+
             </LinearLayout>
             <TextView
                 android:id="@+id/alamat"
@@ -124,6 +124,14 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
                 android:text="@string/rute"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/medan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:text="@string/medan_jalan"
                 android:textSize="14sp" />
             <TextView
                 android:id="@+id/jenis_ikan"
@@ -146,6 +154,24 @@
                 android:paddingTop="8dp"
                 android:text="@string/rekomendasi_umpan"
                 android:textSize="14sp" />
+            <TextView
+                android:id="@+id/coment_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:focusable="true"
+                android:text="@string/tampilkan_ulasan"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/poppins_medium"
+                android:clickable="true"
+                android:padding="8dp"
+                android:foreground="?attr/selectableItemBackground"
+                />
+
+
             <Button
                 android:id="@+id/btn_goto_goolemap"
                 android:layout_width="match_parent"
@@ -153,6 +179,8 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/rute_perjalanan" />
+
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

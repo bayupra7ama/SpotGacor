@@ -15,5 +15,6 @@ data class AddLokasiData(
     val perlengkapan: String,
     val rute: String,
     val umpan: String,
+    val medan : String,
     val image_paths: List<String>
 )

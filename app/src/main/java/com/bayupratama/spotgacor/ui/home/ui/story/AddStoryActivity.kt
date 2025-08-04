@@ -56,6 +56,11 @@ class AddStoryActivity : AppCompatActivity() {
     private fun observeViewModel() {
         viewModel.isLoading.observe(this) { isLoading ->
             binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
+            binding.uploadButton.isEnabled = !isLoading // Disable saat loading
+            binding.cameraButton.isEnabled = !isLoading // Disable saat loading
+
+            binding.galleryButton.isEnabled = !isLoading // Disable saat loading
+
         }
 
         viewModel.responseMessage.observe(this) { message ->
@@ -66,6 +71,7 @@ class AddStoryActivity : AppCompatActivity() {
             if (isSuccess) finish() // Tutup aktivitas jika berhasil
         }
     }
+
 
     private fun uploadStory() {
         val caption = binding.etCaption.text.toString()

@@ -35,11 +35,15 @@ data class Lokasi(
     val rute: String,
     val perlengkapan: String,
     val umpan: String,
-    val jenis_ikan: String
+    val jenis_ikan: String,
+    val medan:String
 )
 
 
 data class Ulasan(
+    val ulsan_id: Int,
+    val user_id: Int, // ✅ tambahkan ini
+
     val user: String,
     val photo_profile: String?,
     val rating: Int,

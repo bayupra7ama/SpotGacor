@@ -17,7 +17,7 @@ class LokasiPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, LokasiItem> {
         val page = params.key ?: 1
         return try {
-            val response = apiService.getLokasiPaged( page, nama_tempat)
+            val response = apiService.getLokasiPaged( page, nama_tempat,jenis_ikan)
             val lokasiList = response.responseData?.lokasiList?.filterNotNull() ?: emptyList()
 
             LoadResult.Page(

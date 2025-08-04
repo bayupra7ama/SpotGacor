@@ -110,6 +110,9 @@ class LokasiItem(
 	@field:SerializedName("alamat")
 	val alamat: String? = null,
 
+	@field:SerializedName("medan")
+	val medan: String? = null,
+
 	@field:SerializedName("average_rating")
 	val averageRating: String? = null,
 

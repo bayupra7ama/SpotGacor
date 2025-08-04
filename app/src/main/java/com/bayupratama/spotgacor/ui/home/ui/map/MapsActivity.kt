@@ -1,6 +1,8 @@
 package com.bayupratama.spotgacor.ui.home.ui.map
 
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -17,7 +19,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.bayupratama.spotgacor.databinding.ActivityMapsBinding
+import com.bayupratama.spotgacor.databinding.BottomSheetLayoutBinding
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 // Activity ini untuk menampilkan peta dan marker lokasi
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -73,7 +77,44 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Meminta lokasi pengguna jika diizinkan
         getMyLocation()
+
+        mMap.setOnMarkerClickListener { marker ->
+            val lokasi = marker.tag as? LokasiItem
+            lokasi?.let {
+                showBottomSheet(it)
+            }
+            true
+        }
+
     }
+
+    private fun showBottomSheet(lokasi: LokasiItem) {
+        val bottomSheetDialog = BottomSheetDialog(this)
+        val binding = BottomSheetLayoutBinding.inflate(layoutInflater)
+        bottomSheetDialog.setContentView(binding.root)
+
+        binding.tempatTextView.text = lokasi.namaTempat.toString()
+        binding.jenisIkan.text = getString(R.string.fish_type, lokasi.jenisIkan)
+        binding.medanJalan.text = getString(R.string.medan_jalan, lokasi.medan)
+        binding.rute.text = getString(R.string.route, lokasi.rute)
+
+        binding.btnNavigasi.setOnClickListener {
+            val gmmIntentUri = Uri.parse("google.navigation:q=${lokasi.lat},${lokasi.jsonMemberLong}&mode=d")
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+
+//            // Menjalankan Google Maps dalam mode overlay (jendela kecil)
+//            mapIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//            mapIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT)
+
+            startActivity(mapIntent)
+        }
+
+        bottomSheetDialog.show()
+    }
+
+
+
 
     // Fungsi untuk menambahkan marker ke peta berdasarkan data lokasi
     private fun addMarkersToMap(lokasiList: List<LokasiItem>) {
@@ -86,7 +127,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     MarkerOptions()
                         .position(latLng)
                         .title(lokasi.namaTempat)
-                )
+                        .snippet("Ikan: ${lokasi.jenisIkan}\nMedan: ${lokasi.medan}")
+                )?.tag = lokasi
                 boundsBuilder.include(latLng)  // Menambahkan marker ke dalam batas peta
             }
         }
@@ -158,6 +200,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 true
             }
             else -> {
+
                 super.onOptionsItemSelected(item)
             }
         }

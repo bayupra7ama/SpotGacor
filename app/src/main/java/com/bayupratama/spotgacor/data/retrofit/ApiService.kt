@@ -9,7 +9,11 @@ import com.bayupratama.spotgacor.data.response.ApiResponseLogout
 import com.bayupratama.spotgacor.data.response.ApiResponseLokasiDetail
 import com.bayupratama.spotgacor.data.response.ApiResponseRegister
 import com.bayupratama.spotgacor.data.response.ApiStoryResponse
+import com.bayupratama.spotgacor.data.response.EditUlasanResponse
+import com.bayupratama.spotgacor.data.response.GenericResponse
+import com.bayupratama.spotgacor.data.response.PhotoResponse
 import com.bayupratama.spotgacor.data.response.Ulasan
+import com.bayupratama.spotgacor.data.response.UserResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -20,6 +24,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -54,6 +59,7 @@ interface ApiService {
     suspend fun getLokasiPaged(
         @Query("page") page: Int,
         @Query("nama_tempat") nama_tempat: String? = null,
+        @Query("jenis_ikan") jenis_ikan: String? = null,
 
 
     ): ApiResponseListLokasi
@@ -77,6 +83,8 @@ interface ApiService {
         @Part("perlengkapan") perlengkapan: RequestBody,
         @Part("rute") rute: RequestBody,
         @Part("umpan") umpan: RequestBody,
+        @Part("medan") medan: RequestBody,
+
         @Part("jenis_ikan") jenisIkan: RequestBody?,
         @Part("lat") lat: RequestBody?,
         @Part("long") long: RequestBody?,
@@ -103,8 +111,35 @@ interface ApiService {
     ): Response<ApiAddStoryResponse>
 
 
-        @POST("api/logout")
+    @POST("api/logout")
         fun logout(): Call<ApiResponseLogout>
 
+
+    @Multipart
+    @POST("api/update-profile-photo") // Pastikan endpoint ini benar
+    suspend fun updateProfilePhoto( // <--- PENTING: HARUS ADA 'suspend'
+        @Part profilePhoto: MultipartBody.Part
+    ): Response<PhotoResponse>
+
+    @GET("api/user/{id}")
+    fun getUserById(@Path("id") id: Int): Call<UserResponse>
+    @Multipart
+    @POST("api/ulasan/{id}")
+    suspend fun updateUlasan(
+        @Part("_method") method: RequestBody, // isinya "PUT"
+
+        @Path("id") ulasanId: Int,
+        @Part("rating") rating: RequestBody,
+        @Part("komentar") komentar: RequestBody,
+        @Part photo: MultipartBody.Part?
+    ): Response<EditUlasanResponse>
+
+    @FormUrlEncoded
+    @POST("api/update-password")
+    fun updatePassword(
+        @Field("current_password") currentPassword: String,
+        @Field("new_password") newPassword: String,
+        @Field("new_password_confirmation") confirmPassword: String
+    ): Call<GenericResponse>
 
 }

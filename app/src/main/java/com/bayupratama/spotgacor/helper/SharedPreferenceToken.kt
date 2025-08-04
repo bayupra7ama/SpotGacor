@@ -2,6 +2,8 @@ package com.bayupratama.spotgacor.helper
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
+import org.json.JSONObject
 
 
 class Sharedpreferencetoken (context: Context) {
@@ -20,14 +22,14 @@ class Sharedpreferencetoken (context: Context) {
     fun getUsername() : String?{
         return sharedpreference.getString("name", null)
     }
-    fun saveUserData(name: String?, email: String?, profileImageUrl: String?) {
+    fun saveUserData(name: String?, email: String?, url: String?, id: String?) {
         // Simpan data pengguna
         editor.putString("name", name)
         editor.putString("email", email)
-
+        editor.putString("id",id)
         // Simpan URL gambar profil
-        profileImageUrl?.let {
-            editor.putString("profileImageUrl", it)
+        url?.let {
+            editor.putString("profileImageUrl", url)
         }
 
         editor.apply()
@@ -38,6 +40,33 @@ class Sharedpreferencetoken (context: Context) {
         return sharedpreference.getString("name", null)
     }
 
+    fun getId(): Int {
+        val idStr = sharedpreference.getString("id", "0")
+        return try {
+            idStr?.toInt() ?: 0
+        } catch (e: Exception) {
+            Log.e("SharedPref", "Gagal convert id ke Int: ${e.message}")
+            0
+        }
+    }
+
+    fun saveProfileImageUrl(url: String) {
+        val editor = sharedpreference.edit()
+        editor.putString("profileImageUrl", url)
+        editor.apply()
+    }
+
+    fun getUserId(): Int {
+        val userJson = sharedpreference.getString("user", null)
+        return if (userJson != null) {
+            val userObj = JSONObject(userJson)
+            userObj.getInt("id")
+        } else 0
+    }
+
+
+
+
     fun getUserEmail(): String? {
         return sharedpreference.getString("email", null)
     }
@@ -46,7 +75,9 @@ class Sharedpreferencetoken (context: Context) {
 
     // Mengambil URL gambar profil
     fun getProfileImageUrl(): String? {
-        return sharedpreference.getString("profileImageUrl", null)
+        val url = sharedpreference.getString("profileImageUrl", null)
+        Log.d("SharedPref", "Mengambil URL foto profil: $url")
+        return url
     }
 
     fun clearData(){

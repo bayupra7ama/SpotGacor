@@ -9,6 +9,10 @@ import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
+import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.format
+import id.zelory.compressor.constraint.quality
+import id.zelory.compressor.constraint.size
 import java.io.File
 import java.text.SimpleDateFormat
 import java.time.ZonedDateTime
@@ -84,6 +88,12 @@ fun formatDateString(dateString: String?): String {
         "Tanggal tidak valid"
     }
 }
-
+suspend fun compressImage(context: Context, file: File): File {
+    return Compressor.compress(context, file) {
+        quality(80) // Atur kualitas sesuai kebutuhan (0-100)
+        format(Bitmap.CompressFormat.JPEG) // Format gambar
+        size(MAXIMAL_SIZE.toLong()) // Ukuran maksimum dalam bytes (1MB)
+    }
+}
 
 

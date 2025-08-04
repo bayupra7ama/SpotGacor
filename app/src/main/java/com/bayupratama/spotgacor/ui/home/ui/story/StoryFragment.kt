@@ -39,7 +39,7 @@ class StoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Menambahkan aksi saat tombol 'addStory' diklik untuk membuka AddStoryActivity
-        binding.addStory.setOnClickListener {
+        binding.addStoryButton.setOnClickListener {
             val intent = Intent(requireContext(), AddStoryActivity::class.java)
             startActivity(intent)
         }

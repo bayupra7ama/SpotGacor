@@ -1,11 +1,16 @@
 package com.bayupratama.spotgacor.ui.home.ui.lokasi
 
+import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.PopupMenu
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bayupratama.spotgacor.data.retrofit.ApiConfig
@@ -49,6 +54,17 @@ class LokasiFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.searchView.setIconifiedByDefault(false)
+        binding.searchView.isIconified = false
+        binding.searchView.clearFocus() // Opsional, agar tidak langsung fokus saat membuka halaman
+
+// Tambahan visual
+        val searchEditText = binding.searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+        searchEditText.hint = "Cari berdasarkan lokasi..."
+        searchEditText.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+        searchEditText.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.colorTextSecondary))
+        searchEditText.setBackgroundColor(Color.TRANSPARENT)
+
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.updateSearchQuery(query)
@@ -60,9 +76,9 @@ class LokasiFragment : Fragment() {
                 return true
             }
         })
-        binding.iconAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_lokasi_to_bagikanLokasiFragment)
-        }
+//        binding.iconAdd.setOnClickListener {
+//            findNavController().navigate(R.id.action_navigation_lokasi_to_bagikanLokasiFragment)
+//        }
         lokasiAdapter = LokasiPagingAdapter { lokasiItem ->
             val bundle = Bundle().apply {
                 putInt("lokasiId", lokasiItem.id ?: 0)
@@ -74,10 +90,39 @@ class LokasiFragment : Fragment() {
                 bundle
             )
         }
-        binding.iconLocation.setOnClickListener{
-            val intent = Intent(requireContext(), MapsActivity::class.java)
-            startActivity(intent)
+//        binding.iconLocation.setOnClickListener{
+//            val intent = Intent(requireContext(), MapsActivity::class.java)
+//            startActivity(intent)
+//        }
+
+        val popupMenu = PopupMenu(requireContext(), binding.iconMenu)
+        popupMenu.menuInflater.inflate(R.menu.menu_lokasi, popupMenu.menu)
+
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu_add_location -> {
+                    findNavController().navigate(R.id.action_navigation_lokasi_to_bagikanLokasiFragment)
+                    true
+                }
+                R.id.menu_open_map -> {
+                    val intent = Intent(requireContext(), MapsActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.menu_filter_fish -> {
+                    showJenisIkanDialog() // fungsi untuk memilih jenis ikan, bisa dialog atau bottom sheet
+                    true
+                }
+                else -> false
+            }
         }
+
+
+
+        binding.iconMenu.setOnClickListener {
+            popupMenu.show()
+        }
+
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = lokasiAdapter
@@ -103,6 +148,19 @@ class LokasiFragment : Fragment() {
             }
         }
     }
+
+    private fun showJenisIkanDialog() {
+        val jenisIkanList = arrayOf("Semua", "lele", "Gurame", "Nila", "Puyu","Gabus", "Toman")
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Pilih Jenis Ikan")
+            .setItems(jenisIkanList) { _, which ->
+                val selectedJenis = if (which == 0) null else jenisIkanList[which]
+                viewModel.updateJenisIkan(selectedJenis)
+            }
+            .show()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null  // Hindari akses binding setelah fragment dihancurkan

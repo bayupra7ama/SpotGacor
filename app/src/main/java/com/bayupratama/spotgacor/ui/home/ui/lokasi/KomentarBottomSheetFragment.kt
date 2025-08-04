@@ -67,8 +67,10 @@ class KomentarBottomSheetFragment : BottomSheetDialogFragment() {
                 // Update data pada adapter
                 komentarAdapter.updateData(ulasanList)
             } else {
+                val currentUserId = Sharedpreferencetoken(requireContext()).getId()
+
                 // Inisialisasi adapter dan RecyclerView
-                komentarAdapter = KomentarAdapter(ulasanList)
+                komentarAdapter = KomentarAdapter(ulasanList,currentUserId)
                 binding.recyclerViewKomentar.layoutManager = LinearLayoutManager(context)
                 binding.recyclerViewKomentar.adapter = komentarAdapter
             }
