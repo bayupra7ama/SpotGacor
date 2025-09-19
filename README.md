@@ -18,8 +18,10 @@ Aplikasi ini terintegrasi dengan backend Laravel dan menggunakan **Firebase** un
 ## 📸 Screenshot
 > Simpan screenshot aplikasi di folder `images/` lalu update link di bawah.
 
-![Dashboard](image/Screenshot 2025-09-19 212104.png)  
-![Detail Spot](images/detail-spot.png)
+![Dashboard](image/tampilan-1.png)  
+![Dashboard](image/tampilan-2.png) 
+![Dashboard](image/tampilan-3.png) 
+![Dashboard](image/tampilan-4.png) 
 
 ---
 
